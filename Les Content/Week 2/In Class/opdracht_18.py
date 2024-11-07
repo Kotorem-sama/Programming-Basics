@@ -14,3 +14,17 @@
 # Getal 0 komt 1 keer voor.
 # Getal 7 komt 1 keer voor.
 # Getal 3 komt 1 keer voor.
+
+import random
+
+def randomisedList():
+    return [random.randint(0, 20) for i in range(0, 10)]
+
+def numberCount(l):
+    dictionary = dict.fromkeys(set(l), 0)
+    for i in l:
+        dictionary[i] += 1
+    return dictionary
+
+for key, value in numberCount(randomisedList()).items():
+    print(f"Getal {key} komt {value} keer voor.")
