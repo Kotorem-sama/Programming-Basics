@@ -15,19 +15,31 @@
 import random
 import time
 
+def heads_or_tails(random):
+    outcomes = { 'heads': 0, 'tails': 0 }
+    sides = list(outcomes.keys())
+
+    for i in range(10000):
+        outcomes[random.choice(sides)] += 1
+    
+    return outcomes
+
 print('Default initializiation:\n')
 
-r1 = random.SystemRandom()
-r2 = random.SystemRandom()
-
-for i in range(3):
-    print('{:04.3f}  {:04.3f}'.format(r1.random(), r2.random()))
+for tries in range(5):
+    outcomes = heads_or_tails(random.SystemRandom())
+    print(f'Heads: {outcomes['heads']}\t Tails: {outcomes['tails']}')
 
 print('\nSame seed:\n')
 
 seed = time.time()
-r1 = random.SystemRandom(seed)
-r2 = random.SystemRandom(seed)
 
-for i in range(3):
-    print('{:04.3f}  {:04.3f}'.format(r1.random(), r2.random()))
+for tries in range(5):
+    outcomes = heads_or_tails(random.SystemRandom(seed))
+    print(f'Heads: {outcomes['heads']}\t Tails: {outcomes['tails']}')
+
+# Conclusion: Doesnt make a single difference to use either.
+# Both outcomes are random, so it doesn't matter whether you
+# use a seed or not. It was supposed to show how with a seed
+# the random output could be determined, however this doesn't
+# seem to be the case.
