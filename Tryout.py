@@ -1,5 +1,8 @@
-def make_pizza(size, *toppings):
-    """Summarize the pizza we are about to make."""
-    print(f"\nMaking a {size}-inch pizza with the following toppings:")
-    for topping in toppings:
-        print(f"- {topping}")
+for i in range(1, 5):
+    if i == 3:
+        break
+    print(i)
+else:
+    print("for loop is done")
+
+print("Outside the for loop")
