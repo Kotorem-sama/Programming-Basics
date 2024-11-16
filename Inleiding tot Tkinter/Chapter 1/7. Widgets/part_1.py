@@ -45,8 +45,9 @@ clr.set("Red")
 
 for i in range(5):
     lbl = Label(window, text=values[i])
-    c = Radiobutton(variable=clr, value=values[i])
     lbl.grid(row = i + 1, column=0)
+    
+    c = Radiobutton(variable=clr, value=values[i])
     c.grid(row=i+1, column=1)
 
 yes_no = IntVar()

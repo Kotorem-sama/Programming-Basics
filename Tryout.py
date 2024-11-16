@@ -1,40 +1,33 @@
 from tkinter import *
-from tkinter import ttk
-from tkinter.ttk import Combobox
+import math
+
+def draw_triangle(event):
+    cnv.create_rectangle(event.x - 5, event.y - 5,
+                         event.x + 5, event.y +5)
+
+def create_star(size, amount, center_x, center_y):
+    points = []
+    angle = math.pi / 2
+
+    for i in range(amount):
+        outer_x = center_x + size * math.cos(angle)
+        outer_y = center_y - size * math.sin(angle)
+        points.append((outer_x, outer_y))
+        angle += 2 * math.pi / amount
+
+        inner_angle = angle - math.pi / amount
+        inner_x = center_x + (size / 2) * math.cos(inner_angle)
+        inner_y = center_y - (size / 2) * math.sin(inner_angle)
+        points.append((inner_x, inner_y))
+
+    return [coord for point in points for coord in point]
 
 window = Tk()
 
-window.title("Welcome")
-window.geometry('350x200')
+cnv = Canvas(window)
+cnv.bind("<Button-1>", draw_triangle)
+cnv.pack()
 
-# lbl = Label(window, text="Hello", font=("Arial Bold", 50))
-# lbl.grid(column=0, row=0)
-
-# combo = Combobox(window)
-
-# combo['values']= (1, 2, 3, "Bruh", "Bruh2", "Bruh3")
-# combo.current(0)
-# combo.grid(column=0, row=1)
-
-# def clicked():
-#     lbl.configure(text="De knop is geklikt!")
-
-# btn = Button(window, text="Klik op mij", bg="yellow", fg="red", command=clicked)
-# btn.grid(column=1, row=0)
-
-tab_control = ttk.Notebook(window)
-tab1 = ttk.Frame(tab_control)
-tab2 = ttk.Frame(tab_control)
-
-tab_control.add(tab1, text='Eerste tab')
-tab_control.add(tab2, text="Tweede tab")
-
-lbl1 = Label(tab1, text="Dit is de tekst van mijn eerste tab")
-lbl1.grid(column=0, row=0)
-
-lbl2 = Label(tab2, text="En dit is de tekst van tab 2, hallo daar")
-lbl2.grid(column=0, row=0)
-
-tab_control.pack(expand=1, fill='both')
+cnv.create_polygon(create_star(50, 5, 0, 0))
 
 window.mainloop()
