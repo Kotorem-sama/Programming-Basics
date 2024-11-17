@@ -2,6 +2,7 @@
 
 from tkinter import *
 import math
+from tkinter import messagebox
 
 color = "#000000"
 red = 0
@@ -86,7 +87,9 @@ def use():
     shape = clr.get()
 
 def clear():
-    cnv.delete("all")
+    
+    if messagebox.askyesno("Clear", "Are you sure you want to clear the canvas?"):
+        cnv.delete("all")
 
 window = Tk()
 window.geometry("400x500")
